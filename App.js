@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, Image } from 'react-native';
+import { Button } from './components'
+
+
 
 export default function App() {
-  const [texto, setTexto] = useState("Frasses do dia...")
+  const [texto, setTexto] = useState("Frasses do dia...");
+  const [img, setImg] = useState(require('./assets/cookie.png'));
+  const [label, setLabel] = useState('Quebrar biscoito');
   const frases = [
     'A vida é uma coisa boa se tiveres paciencia',
     'O homem comum fala, o sábio escuta, o tolo discute.',
@@ -18,24 +23,28 @@ export default function App() {
 
   ];
 
+  function handleButton() {
+    if (label === 'Quebrar biscoito') {
+      setImg(require('./assets/broken_cookie.png'));
+      setLabel("Novo biscoito")
+      let r = Math.floor(Math.random() * frases.length);
+      setTexto(frases[r]);
+    }
+    else {
+      setImg(require('./assets/cookie.png'));
+      setLabel("Quebrar biscoito")
+      setTexto("Frases do dia");
+    }
+    // let textoNovo = frases[r]
+  }
 
 
   return (
-    <View style={styles.container}>
-      <Image source={require('./assets/cookie.png')} />
+    <SafeAreaView style={styles.container}>
+      <Image source={img} />
       <Text style={styles.frases}>"{texto}"</Text>
-
-      <TouchableOpacity style={styles.botao} onPress={() => {
-        let r = Math.floor(Math.random() * frases.length);
-        let textoNovo = frases[r]
-        setTexto(textoNovo)
-      }}>
-
-        <View>
-          <Text style={styles.txtBotao}>Quebrar biscoito</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+      <Button onPress={() => handleButton()} text={label} />
+    </SafeAreaView>
   );
 }
 
@@ -45,20 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF8DC',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  botao: {
-    width: 250,
-    height: 50,
-    borderWidth: 2,
-    borderColor: '#D2691E',
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  txtBotao: {
-    fontSize: 20,
-    color: '#D2691E',
-    fontWeight: 'bold'
   },
   frases: {
     fontSize: 17,
