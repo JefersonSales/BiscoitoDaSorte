@@ -5,7 +5,7 @@ import { Button } from './components'
 
 
 export default function App() {
-  const [texto, setTexto] = useState("Frasses do dia...");
+  const [texto, setTexto] = useState("Biscoito da sorte");
   const [img, setImg] = useState(require('./assets/cookie.png'));
   const [label, setLabel] = useState('Quebrar biscoito');
   const frases = [
@@ -33,7 +33,7 @@ export default function App() {
     else {
       setImg(require('./assets/cookie.png'));
       setLabel("Quebrar biscoito")
-      setTexto("Frases do dia");
+      setTexto("Biscoito da sorte");
     }
     // let textoNovo = frases[r]
   }
